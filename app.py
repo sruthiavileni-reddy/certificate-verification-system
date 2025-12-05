@@ -46,7 +46,7 @@ def generate_qr(cert_id):
     # Use the correct URL based on environment
     if os.environ.get('RENDER'):
         # Production URL - UPDATE THIS after you get your Render URL!
-        base_url = "https://your-app-name.onrender.com"
+        base_url = "https://certificate-verification-system-1-gvnz.onrender.com"
     else:
         # Local development
         base_url = "http://192.168.0.66:5000"
