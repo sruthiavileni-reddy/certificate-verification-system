@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NxtSync - Certificate Verification Portal</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #0f4c75 0%, #1a5f8a 100%);
+    font-family: "Poppins", sans-serif;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    text-align: center;
+    animation: fadeInUp 1s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.logo {
+    width: 220px;
+    margin-bottom: 30px;
+    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+    animation: fadeIn 1.2s ease;
+}
+
+.subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 50px;
+    opacity: 0.9;
+    animation: fadeIn 1.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.search-card {
+    background: white;
+    padding: 50px 40px;
+    border-radius: 25px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    animation: scaleIn 1.2s ease;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.search-card h2 {
+    color: #0f4c75;
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.search-card p {
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 35px;
+}
+
+.search-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 20px 20px 20px 55px;
+    border: 3px solid #e0e0e0;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    font-family: "Poppins", sans-serif;
+}
+
+.input-group input:focus {
+    border-color: #0f4c75;
+    box-shadow: 0 0 0 4px rgba(15, 76, 117, 0.1);
+}
+
+.input-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: #0f4c75;
+}
+
+.search-btn {
+    padding: 20px;
+    background: linear-gradient(135deg, #0f4c75 0%, #1a5f8a 100%);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(15, 76, 117, 0.3);
+}
+
+.search-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(15, 76, 117, 0.5);
+}
+
+.search-btn:active {
+    transform: translateY(0px);
+}
+
+.message {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 1rem;
+    animation: fadeIn 0.5s ease;
+}
+
+.error {
+    background: #ffebee;
+    color: #c62828;
+    border: 2px solid #ef5350;
+}
+
+.info {
+    background: #e3f2fd;
+    color: #1565c0;
+    border: 2px solid #42a5f5;
+}
+
+.loading {
+    background: #fff3e0;
+    color: #e65100;
+    border: 2px solid #ff9800;
+}
+
+.footer {
+    margin-top: 60px;
+    text-align: center;
+    opacity: 0.8;
+    animation: fadeIn 2s ease;
+}
+
+.footer p {
+    margin: 5px 0;
+    font-size: 0.95rem;
+}
+
+.footer a {
+    color: #76d4ff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.feature {
+    text-align: center;
+    max-width: 150px;
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.feature-text {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+@media (max-width: 700px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .search-card {
+        padding: 35px 25px;
+    }
+    
+    .search-card h2 {
+        font-size: 1.5rem;
+    }
+    
+    .logo {
+        width: 160px;
+    }
+    
+    .features {
+        gap: 25px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <img src="https://res.cloudinary.com/dpuo8rzhe/image/upload/v1749635641/NS_NEW_LOGO-removebg-preview_qm2kh5.png" alt="NxtSync Logo" class="logo">
+    
+    <h1>🎓 Certificate Verification</h1>
+    <p class="subtitle">Verify your internship completion certificate</p>
+    
+    <div class="search-card">
+        <h2>Search Certificate</h2>
+        <p>Enter the student's full name to view their certificate</p>
+        
+        <form class="search-form" onsubmit="searchCertificate(event)">
+            <div class="input-group">
+                <span class="input-icon">👤</span>
+                <input 
+                    type="text" 
+                    id="studentName" 
+                    placeholder="Enter student name (e.g., DEVARAKONDA ANIRUDH)" 
+                    required
+                    autocomplete="off"
+                >
+            </div>
+            
+            <button type="submit" class="search-btn">
+                🔍 Search Certificate
+            </button>
+        </form>
+        
+        <div id="messageBox"></div>
+    </div>
+    
+    <div class="features">
+        <div class="feature">
+            <div class="feature-icon">✅</div>
+            <div class="feature-text">Instant Verification</div>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">🔒</div>
+            <div class="feature-text">Secure & Authentic</div>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">📱</div>
+            <div class="feature-text">QR Code Enabled</div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p><strong>NxtSync Pvt. Ltd</strong></p>
+        <p>Internship Verification Portal</p>
+        <p style="margin-top: 15px;">
+            <a href="mailto:hrnxtsync@gmail.com">📧 hrnxtsync@gmail.com</a> | 
+            <a href="tel:7676907590">📞 7676907590</a>
+        </p>
+        <p style="margin-top: 10px;">
+            <a href="https://nxtsync.in/" target="_blank">🌐 www.nxtsync.in</a>
+        </p>
+    </div>
+</div>
+
+<script>
+function searchCertificate(event) {
+    event.preventDefault();
+    
+    const studentName = document.getElementById('studentName').value.trim().toUpperCase();
+    const messageBox = document.getElementById('messageBox');
+    
+    if (!studentName) {
+        showMessage('Please enter a student name', 'error');
+        return;
+    }
+    
+    // Show loading message
+    showMessage('🔍 Searching for certificate...', 'loading');
+    
+    // Search by name in the backend
+    fetch(`/api/search?name=${encodeURIComponent(studentName)}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Certificate found! Redirect to certificate page
+                showMessage('✅ Certificate found! Redirecting...', 'info');
+                setTimeout(() => {
+                    window.location.href = `/certificate/${data.id}`;
+                }, 1000);
+            } else {
+                // Certificate not found
+                showMessage(`❌ No certificate found for "${studentName}". Please check the spelling and try again.`, 'error');
+            }
+        })
+        .catch(error => {
+            showMessage('⚠️ Error searching for certificate. Please try again.', 'error');
+            console.error('Error:', error);
+        });
+}
+
+function showMessage(text, type) {
+    const messageBox = document.getElementById('messageBox');
+    messageBox.innerHTML = `<div class="message ${type}">${text}</div>`;
+}
+
+// Allow Enter key to search
+document.getElementById('studentName').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        searchCertificate(e);
+    }
+});
+</script>
+
+</body>
+</html>
