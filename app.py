@@ -45,7 +45,7 @@ def init_db():
 def create_qr_code_image(cert_id):
     """Generate QR code for certificate verification"""
     if os.environ.get('RENDER'):
-        base_url = "https://certificate-verification-system-1-gvnz.onrender.com"
+        base_url = "https://certificate-verification-system-3.onrender.com"
     else:
         # Fixed IP address for your laptop
         base_url = "http://192.168.0.66:5000"
@@ -213,7 +213,7 @@ def get_certificate_url(cert_id):
     
     # Return URL with fixed IP
     if os.environ.get('RENDER'):
-        base_url = "https://certificate-verification-system-1-gvnz.onrender.com"
+        base_url = "https://certificate-verification-system-3.onrender.com"
     else:
         base_url = "http://192.168.0.66:5000"
     
