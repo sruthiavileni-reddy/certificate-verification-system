@@ -144,39 +144,6 @@ body {
     }
 }
 
-.info-box {
-    background: white;
-    border-radius: 15px;
-    padding: 20px;
-    margin: 20px 0;
-    text-align: left;
-    animation: fadeIn 0.8s ease-out 1.4s both;
-}
-
-.info-item {
-    display: flex;
-    align-items: center;
-    margin: 12px 0;
-    font-size: 16px;
-}
-
-.info-item .icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 12px;
-    color: #4CAF50;
-}
-
-.info-item strong {
-    color: #0f4c75;
-    margin-right: 8px;
-    min-width: 100px;
-}
-
-.info-item span {
-    color: #666;
-}
-
 .verify-badge {
     display: inline-block;
     background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
@@ -188,41 +155,6 @@ body {
     margin-top: 20px;
     box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
     animation: fadeIn 0.8s ease-out 1.6s both;
-}
-
-.company-logo {
-    width: 150px;
-    margin: 30px auto 20px;
-    animation: fadeIn 0.8s ease-out 1.8s both;
-}
-
-.footer {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 2px solid #eee;
-    color: #999;
-    font-size: 14px;
-    animation: fadeIn 0.8s ease-out 2s both;
-}
-
-.view-certificate-btn {
-    display: inline-block;
-    background: #0f4c75;
-    color: white;
-    padding: 15px 40px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 16px;
-    margin-top: 20px;
-    transition: all 0.3s ease;
-    animation: fadeIn 0.8s ease-out 2.2s both;
-}
-
-.view-certificate-btn:hover {
-    background: #1a5f8a;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(15, 76, 117, 0.3);
 }
 
 .loading {
@@ -277,113 +209,22 @@ body {
 </div>
 
 <script>
-// Get certificate ID from URL
 const pathParts = window.location.pathname.split('/');
 const certId = pathParts[pathParts.length - 1];
 
-console.log('Certificate ID:', certId); // Debug log
-
-// Fetch certificate data
-fetch(`/api/certificate/${certId}`)
-    .then(response => {
-        console.log('Response status:', response.status); // Debug log
-        return response.json();
-    })
+fetch('/api/certificate/' + certId)
+    .then(response => response.json())
     .then(data => {
-        console.log('Certificate data:', data); // Debug log
         const container = document.getElementById('verifyContainer');
         
         if (data.success) {
-            container.innerHTML = `
-                <div class="checkmark-container">
-                    <div class="checkmark">
-                        <svg viewBox="0 0 52 52">
-                            <polyline points="14 27 22 35 38 17"/>
-                        </svg>
-                    </div>
-                </div>
-
-                <div class="status">✓ CERTIFICATE VERIFIED</div>
-                <div class="message">This certificate is authentic and issued by NxtSync</div>
-
-                <div class="approval-section">
-                    <div class="approval-title">AICTE APPROVAL</div>
-                    <img src="https://vectorseek.com/wp-content/uploads/2023/09/AICTE-Logo-Vector.svg-.png" 
-                         alt="AICTE Logo" class="aicte-logo">
-                    <div class="verify-badge">✓ APPROVED</div>
-                </div>
-
-                <div class="info-box">
-                    <div class="info-item">
-                        <span class="icon">🆔</span>
-                        <strong>Certificate ID:</strong>
-                        <span>${data.id}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="icon">👤</span>
-                        <strong>Name:</strong>
-                        <span>${data.name}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="icon">📚</span>
-                        <strong>Domain:</strong>
-                        <span>${data.domain}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="icon">📅</span>
-                        <strong>Issue Date:</strong>
-                        <span>${data.issue_date}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="icon">🏢</span>
-                        <strong>Issued By:</strong>
-                        <span>NxtSync Pvt. Ltd</span>
-                    </div>
-                </div>
-
-                <img src="https://res.cloudinary.com/dpuo8rzhe/image/upload/v1749635641/NS_NEW_LOGO-removebg-preview_qm2kh5.png" 
-                     alt="NxtSync Logo" class="company-logo">
-
-                <a href="/certificate/${data.id}" class="view-certificate-btn">
-                    📄 View Full Certificate
-                </a>
-
-                <div class="footer">
-                    <p>Verified on ${new Date().toLocaleDateString()}</p>
-                    <p style="margin-top: 10px;">© NxtSync Pvt. Ltd - All Rights Reserved</p>
-                </div>
-            `;
+            container.innerHTML = '<div class="checkmark-container"><div class="checkmark"><svg viewBox="0 0 52 52"><polyline points="14 27 22 35 38 17"/></svg></div></div><div class="status">&#10003; CERTIFICATE VERIFIED</div><div class="message">This certificate is authentic and issued by NxtSync</div><div class="approval-section"><div class="approval-title">AICTE APPROVAL</div><img src="https://vectorseek.com/wp-content/uploads/2023/09/AICTE-Logo-Vector.svg-.png" alt="AICTE Logo" class="aicte-logo"><div class="verify-badge">&#10003; APPROVED</div></div>';
         } else {
-            container.innerHTML = `
-                <div class="checkmark-container">
-                    <div class="checkmark" style="background: #f44336;">
-                        <svg viewBox="0 0 52 52" style="stroke: white;">
-                            <line x1="16" y1="16" x2="36" y2="36" stroke-width="3"/>
-                            <line x1="36" y1="16" x2="16" y2="36" stroke-width="3"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="status" style="color: #f44336;">✗ CERTIFICATE NOT FOUND</div>
-                <div class="message">The certificate ID "${certId}" could not be verified.</div>
-                <a href="/" class="view-certificate-btn">← Back to Home</a>
-            `;
+            container.innerHTML = '<div class="checkmark-container"><div class="checkmark" style="background: #f44336;"><svg viewBox="0 0 52 52" style="stroke: white;"><line x1="16" y1="16" x2="36" y2="36" stroke-width="3"/><line x1="36" y1="16" x2="16" y2="36" stroke-width="3"/></svg></div></div><div class="status" style="color: #f44336;">&#10007; CERTIFICATE NOT FOUND</div><div class="message">The certificate ID "' + certId + '" could not be verified.</div>';
         }
     })
     .catch(error => {
-        console.error('Error:', error); // Debug log
-        document.getElementById('verifyContainer').innerHTML = `
-            <div class="checkmark-container">
-                <div class="checkmark" style="background: #ff9800;">
-                    <svg viewBox="0 0 52 52" style="stroke: white;">
-                        <line x1="26" y1="16" x2="26" y2="32" stroke-width="3"/>
-                        <circle cx="26" cy="38" r="2" fill="white"/>
-                    </svg>
-                </div>
-            </div>
-            <div class="status" style="color: #ff9800;">⚠ Verification Error</div>
-            <div class="message">Unable to verify certificate at this time. Please try again.</div>
-            <a href="/" class="view-certificate-btn">← Back to Home</a>
-        `;
+        document.getElementById('verifyContainer').innerHTML = '<div class="checkmark-container"><div class="checkmark" style="background: #ff9800;"><svg viewBox="0 0 52 52" style="stroke: white;"><line x1="26" y1="16" x2="26" y2="32" stroke-width="3"/><circle cx="26" cy="38" r="2" fill="white"/></svg></div></div><div class="status" style="color: #ff9800;">&#9888; Verification Error</div><div class="message">Unable to verify certificate at this time. Please try again.</div>';
     });
 </script>
 
