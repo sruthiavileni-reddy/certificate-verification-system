@@ -156,7 +156,8 @@ def load_fonts():
             default = ImageFont.load_default()
             return default, default, default
 
-def create_qr_code(cert_id, base_url="http://192.168.0.66:5000"):
+def create_qr_code(cert_id, base_url="https://certificate-verification-system-3.onrender.com"):
+
     """Generate QR code for verification"""
     verification_url = f"{base_url}/verify/{cert_id}"
     qr = qrcode.QRCode(version=1, box_size=10, border=2)
