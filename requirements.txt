@@ -1,5 +1,5 @@
-Flask==3.0.0
-Flask-CORS==4.0.0
-Pillow==10.1.0
-qrcode[pil]==7.4.2
-gunicorn==21.2.0
+Flask
+Flask-CORS
+Pillow
+qrcode[pil]
+gunicorn
