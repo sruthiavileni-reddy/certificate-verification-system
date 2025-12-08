@@ -166,13 +166,8 @@ def create_qr_code(cert_id, base_url="https://certificate-verification-system-3.
     return qr.make_image(fill_color="black", back_color="white")
 
 def calculate_end_date(start_date_str):
-    """Calculate end date (127 days after start)"""
-    try:
-        start = datetime.strptime(start_date_str, '%Y-%m-%d')
-        end = start + timedelta(days=127)
-        return start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')
-    except:
-        return start_date_str, "2026-03-31"
+    """Calculate end date (fixed to 2025-08-19)"""
+    return start_date_str, "2025-08-19"
 
 def generate_certificate(student_data, template_path, output_folder):
     """Generate certificate for one student"""
